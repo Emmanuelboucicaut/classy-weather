@@ -11,7 +11,7 @@ function getWeatherIcon(wmoCode) {
     [[53, 55, 63, 65, 57, 67, 81, 82], "🌧"],
     [[71, 73, 75, 77, 85, 86], "🌨"],
     [[95], "🌩"],
-    [[96, 99], "⛈"],
+    [[96, 99], "⛈"]
   ]);
   const arr = [...icons.keys()].find((key) => key.includes(wmoCode));
   if (!arr) return "NOT FOUND";
@@ -29,7 +29,7 @@ function convertToFlag(countryCode) {
 
 function formatDay(dateStr) {
   return new Intl.DateTimeFormat("en", {
-    weekday: "short",
+    weekday: "short"
   }).format(new Date(dateStr));
 }
 
@@ -38,7 +38,7 @@ class App extends React.Component {
     location: "",
     isLoading: false,
     displayLocation: "",
-    weather: {},
+    weather: {}
   };
 
   fetchWeather = async () => {
@@ -60,7 +60,7 @@ class App extends React.Component {
         geoData.results.at(0);
 
       this.setState({
-        displayLocation: `${name} ${convertToFlag(country_code)}`,
+        displayLocation: `${name} ${convertToFlag(country_code)}`
       });
 
       // 2) Getting actual weather
@@ -96,7 +96,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <h1>Classy Weather</h1>
+        <h1>Erej Weather</h1>
         <Input
           location={this.state.location}
           onChangeLocation={this.setLocation}
@@ -141,12 +141,12 @@ class Weather extends React.Component {
       temperature_2m_max: max,
       temperature_2m_min: min,
       time: dates,
-      weathercode: codes,
+      weathercode: codes
     } = this.props.weather;
     return (
       <div>
         <h2>Weather {this.props.location}</h2>
-        <ul className="weather">
+        <ul className="weather text-dark">
           {dates.map((date, i) => (
             <Day
               date={date}
@@ -168,7 +168,7 @@ class Day extends React.Component {
     const { date, max, min, code, isToday } = this.props;
 
     return (
-      <li className="day">
+      <li className="day text-dark fs-3">
         <span>{getWeatherIcon(code)}</span>
         <p>{isToday ? "Today" : formatDay(date)}</p>
         <p>
